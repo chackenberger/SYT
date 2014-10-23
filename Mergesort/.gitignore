@@ -1,0 +1,4 @@
+/Debug/
+*.cproject
+/org.eclipse.cdt.managedbuilder.core.prefs
+/.project
