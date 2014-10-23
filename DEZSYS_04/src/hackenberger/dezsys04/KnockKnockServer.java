@@ -34,21 +34,22 @@ import java.net.*;
 import java.io.*;
 
 //DEZSYS-04 Hackenberger Christoph
-public class KnockKnockServer {
-    public static void main(String[] args) throws IOException {
-        
-        if (args.length != 1) {
-            System.err.println("Usage: java KnockKnockServer <port number>");
-            System.exit(1);
-        }
-
-        int portNumber = Integer.parseInt(args[0]);
-
-        //try-with-resources schließt in einem automatisch im Hintergund erstellten finally block
+public class KnockKnockServer extends Thread {
+	
+	private int port;
+	
+	public KnockKnockServer(int port) {
+		this.port = port;
+		this.setDaemon(true);
+	}
+	
+	@Override
+	public void run() {
+		 //try-with-resources schließt in einem automatisch im Hintergund erstellten finally block
         //alle Resources
         try ( 
         	//ServerSocket wird in einem try-with-resources statement initalisiert
-            ServerSocket serverSocket = new ServerSocket(portNumber);
+            ServerSocket serverSocket = new ServerSocket(port);
         ) {
         	while(true)
         		//Erstellt einen neuen ServerWorker mit dem neuen Socket vom ServerSocket
@@ -56,8 +57,8 @@ public class KnockKnockServer {
           
         } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
-                + portNumber + " or listening for a connection");
+                + port + " or listening for a connection");
             System.out.println(e.getMessage());
         }
-    }
+	}
 }

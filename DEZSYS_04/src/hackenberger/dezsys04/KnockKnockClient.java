@@ -36,16 +36,13 @@ import java.net.*;
 
 //DEZSYS-04 Hackenberger Christoph
 public class KnockKnockClient {
-    public static void main(String[] args) throws IOException {
+	
+	
+    public void talkToServer(String host, int port) throws IOException {
         
-        if (args.length != 2) {
-            System.err.println(
-                "Usage: java EchoClient <host name> <port number>");
-            System.exit(1);
-        }
 
-        String hostName = args[0];
-        int portNumber = Integer.parseInt(args[1]);
+        String hostName = host;
+        int portNumber = port;
 
         //try-with-resources schließt in einem automatisch im Hintergund erstellten finally block
         //alle Resources
