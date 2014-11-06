@@ -4,8 +4,8 @@
 #define SORTIEREN_H
 
 void msort(int*,int);
-void radix_sort(int*, int);
-void insertion_sort(int*, int);
+void radix(int*, int);
+void insertion(int*, int);
 
 typedef struct {
 	int* list;

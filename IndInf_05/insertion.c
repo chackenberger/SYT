@@ -4,7 +4,7 @@
 #include <stddef.h>
 #include "sortieren.h"
 
-void insertion_sort(int *a, int n) {
+void insertion(int *a, int n) {
     size_t i, j;
     int value;
     for (i = 1; i < n; i++) {

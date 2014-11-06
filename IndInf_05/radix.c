@@ -32,7 +32,7 @@ static void rad_sort_u(uint *from, uint *to, uint bit)
 }
 
 /* sort signed ints: flip highest bit, sort as unsigned, flip back */
-void radix_sort(int *a, int len)
+void radix(int *a, int len)
 {
 	size_t i;
 	uint *x = (uint*) a;
