@@ -8,12 +8,17 @@
 static void merge(int * list, int left_start, int left_end, int right_start, int right_end);
 static void mergesort_r(int left, int right, int * list);
 
-
+/*
+ * Sortiert einen Vektor mittels Mergesort
+ */
 void msort(int * list, int length)
 {
 	mergesort_r(0, length, list);
 }
 
+/*
+ * Hilfsfunktion fuer den Mergesort
+ */
 static void merge(int * list, int left_start, int left_end, int right_start, int right_end)
 {
 	/* calculate temporary list sizes */
@@ -52,6 +57,9 @@ static void merge(int * list, int left_start, int left_end, int right_start, int
 	for ( ; r < right_length; i++, r++) { list[i] = right_half[r]; }
 }
 
+/*
+ * Hilfsfunktion fuer den Mergesort
+ */
 static void mergesort_r(int left, int right, int * list)
 {
 	/* Base case, the list can be no simpiler */
