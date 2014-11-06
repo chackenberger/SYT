@@ -4,6 +4,9 @@
 #include <stddef.h>
 #include "sortieren.h"
 
+/*
+ * Sortiert einen Vektor mittels Insertionsort
+ */
 void insertion(int *a, int n) {
     size_t i, j;
     int value;

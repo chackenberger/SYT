@@ -18,6 +18,11 @@ static void print_struct(sorter* s);
 static void showCommandList();
 static void sort_with(sorter* s, void(*sort)(int*,int));
 
+/*
+ * Main-Methode
+ * Stellt das CLI-Menue fuer den Benutzer zur Verfuegung und macht die
+ * grundlegenden Initalisierungen
+ */
 int main(void) {
 	srand( (unsigned) time(NULL) );
 	sorter* s = (sorter*)malloc(sizeof(sorter));
@@ -36,14 +41,20 @@ int main(void) {
 		else if(strcmp(in,"show\n") == 0)
 			print_struct(s);
 		else if(strcmp(in,"msort\n") == 0) {
+			clock_t t = clock();
 			sort_with(s,msort);
-			printf("\n Sortiert mit Mergesort!\n");
+			t = clock() - t;
+			printf("\n Sortiert mit Mergesort! Zeit: %lf Sekunden\n",((float)t)/CLOCKS_PER_SEC);
 		}else if(strcmp(in,"radix\n") == 0) {
+			clock_t t = clock();
 			sort_with(s,radix);
-			printf("\n Sortiert mit Radixsort!\n");
+			t = clock() - t;
+			printf("\n Sortiert mit Radixsort! Zeit: %lf Sekunden\n",((float)t)/CLOCKS_PER_SEC);
 		}else if(strcmp(in,"insertion\n") == 0) {
+			clock_t t = clock();
 			sort_with(s,insertion);
-			printf("\n Sortiert mit Insertionsort!\n");
+			t = clock() - t;
+			printf("\n Sortiert mit Insertionsort! Zeit: %lf Sekunden\n",((float)t)/CLOCKS_PER_SEC);
 		}else if(strcmp(in,"cSize\n") == 0) {
 			printf("\nGeben Sie eine Groeße fuer den Vektor an (x > 0)\n>");
 			fgets(in,100,stdin);
@@ -68,6 +79,9 @@ int main(void) {
 	return EXIT_SUCCESS;
 }
 
+/*
+ * Fuellt den Vektor mit zufaelligen Zahlen
+ */
 static void fuellen(sorter* s)
 {
 	int i;
@@ -76,6 +90,9 @@ static void fuellen(sorter* s)
 	}
 }
 
+/*
+ * Initalisiert das Struct
+ */
 static void init(sorter* s,int length, void(*sort)(int*,int)) {
 	s->length = length;
 	s->list = (int*)malloc(length * sizeof(int));
@@ -83,21 +100,33 @@ static void init(sorter* s,int length, void(*sort)(int*,int)) {
 	fuellen(s);
 }
 
+/*
+ * Freet den Speicher des Vektors und des Structs
+ */
 static void un_init(sorter* s) {
 	free(s->list);
 	free(s);
 }
 
+/*
+ * Aendert die Groeße des Vektors
+ */
 static void change_size(sorter* s, int length) {
 	s->length = length;
 	s->list = (int*)realloc(s->list,length * sizeof(int));
 }
 
+/*
+ * Sortiert den Vektor mit der angegebenen Funktion
+ */
 static void sort_with(sorter* s, void(*sort)(int*,int)) {
 	s->sort = sort;
 	s->sort(s->list,s->length);
 }
 
+/*
+ * Gibt den Vektor aus
+ */
 static void print_struct(sorter* s) {
 	int i;
 	printf("\n Zahlen: ");
@@ -107,6 +136,9 @@ static void print_struct(sorter* s) {
 	printf("\n");
 }
 
+/*
+ * Printed eine Liste aller verfuegbaren Command auf die Konsole
+ */
 static void showCommandList() {
 	printf("\nshow - Zeigt die Zahlen des Vektors an\n");
 	printf("msort - Mergesort auf den Vektor anwenden\n");
